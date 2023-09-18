@@ -6,7 +6,5 @@
     align-items: center;
     justify-content: center;
     margin: 0;
-    background: rgb(0,255,193);
-  background: linear-gradient(180deg, rgba(0,255,193,1) 0%, rgba(0,0,0,1) 100%);
-    
+    background: black;
 }
