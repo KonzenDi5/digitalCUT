@@ -4,7 +4,7 @@ import footer from './images/footer.png'
 
 function Footer() {
   return (
-    <div className='container'>
+    <div className='container-footer'>
         <img className ='footer' src={footer} alt="LogoBrain" />
     </div>
   );

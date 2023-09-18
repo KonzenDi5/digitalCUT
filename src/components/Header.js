@@ -4,7 +4,7 @@ import header from './images/logo.png'
 
 function Header() {
   return (
-    <div className='container'>
+    <div className='container-header'>
         <img className ='logo' src={header} alt="LogoBrain" />
     </div>
   );
