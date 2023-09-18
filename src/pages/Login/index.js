@@ -1,25 +1,43 @@
 import React, { useState } from 'react';
 import './login.css';
+import google from './images/google.png';
+import apple from './images/apple.png';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBLAP5Da11Dhfzd4KbuCWPYrf41MdJsSzo",
+  authDomain: "digitalc-3e567.firebaseapp.com",
+  projectId: "digitalc-3e567",
+  storageBucket: "digitalc-3e567.appspot.com",
+  messagingSenderId: "694261131096",
+  appId: "1:694261131096:web:7c91464d49e5707e01e72d",
+  measurementId: "G-09KG4FV9TB"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui, você pode adicionar lógica para autenticação, como enviar os dados para um servidor.
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Mantenha-me Conectado:', rememberMe);
-  };
 
-  const handleGoogleLogin = () => {
-    // Lógica de login com o Google aqui
-  };
+    try {
+      // Autenticar o usuário com o Firebase Authentication
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('Usuário autenticado:', user);
 
-  const handleAppleLogin = () => {
-    // Lógica de login com a Apple aqui
+      // Redirecionar o usuário para a página principal ou realizar ações desejadas após o login bem-sucedido.
+
+    } catch (error) {
+      console.error('Erro ao autenticar:', error.message);
+      // Lidar com erros de autenticação aqui, como exibir uma mensagem de erro para o usuário.
+    }
   };
 
   return (
@@ -41,25 +59,15 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <div className="remember-me">
-            <input
-              type="checkbox"
-              id="rememberMe"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
-            />
-            <label htmlFor="rememberMe">Mantenha-me Conectado</label>
-          </div>
           <button type="submit">Login</button>
+          <p className='esqueceuSenha'>Esqueceu sua senha?</p>
+          <p className='register'>Não tem uma conta? Registre-se agora</p>
         </form>
         <div className="social-login">
-          <button className="google-login" onClick={handleGoogleLogin}>
-            Login com o Google
-          </button>
-          <button className="apple-login" onClick={handleAppleLogin}>
-            Login com a Apple
-          </button>
+          <img className='google' src={google} alt="icongoogle" />
+          <img className='apple' src={apple} alt="iconeapple" />
         </div>
+        <p className='termos'>Ao realizar o login, você concorda com nossos termos.</p>
       </div>
     </div>
   );
