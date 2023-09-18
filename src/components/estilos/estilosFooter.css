@@ -4,4 +4,5 @@
 }
 .container{
     background-color: black;
+    max-width: 250px;
 }
